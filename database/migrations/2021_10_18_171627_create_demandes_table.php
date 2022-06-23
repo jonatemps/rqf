@@ -16,7 +16,6 @@ class CreateDemandesTable extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('motif');
             $table->text('description')->nullable();
             $table->string('emission')->nullable();
             $table->string('transaction')->nullable();
