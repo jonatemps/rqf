@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddServiceToDemande extends Migration
+class RefactoreDemandeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,11 @@ class AddServiceToDemande extends Migration
     public function up()
     {
         Schema::table('demandes', function (Blueprint $table) {
-            $table->unsignedBigInteger('service_id')->nullable()->after('id');
+            $table->unsignedBigInteger('depense_id');
+            $table->string('type_document');
 
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('depense_id')->references('id')->on('depenses');
+
         });
     }
 
