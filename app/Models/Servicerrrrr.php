@@ -29,4 +29,5 @@ class Service extends Model
     {
         return $this->belongsTo(Secteur::class,'seceur_id');
     }
+
 }

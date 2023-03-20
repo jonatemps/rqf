@@ -19,6 +19,8 @@ class DemandFollow extends Notification
      *
      * @return void
      */
+    private $demande;
+    
     public function __construct(Demande $demande)
     {
         $this->demande = $demande;

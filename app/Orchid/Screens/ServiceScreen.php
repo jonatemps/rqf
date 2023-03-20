@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens;
 
-use App\Models\service;
+use App\Models\Service;
 use App\Orchid\Layouts\ServiceListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

@@ -6,7 +6,7 @@ use App\Models\Beneficiare;
 use App\Models\Budget;
 use App\Models\Demande;
 use App\Models\Depense;
-use App\Models\service;
+use App\Models\Service;
 use App\Models\User;
 use App\Notifications\DemandFollow;
 use App\Notifications\NewDemandAB1;
@@ -82,16 +82,17 @@ class DemandeEditScreen extends Screen
 
         $this->dem = $demande;
         $this->demande = $demande;
-        $this->name = 'Informatins de la demande du service: '.Auth::user()->service->name;
+        $this->name = 'Informations de la demande du service: '.Auth::user()->service->name;
 
         if (! $demande->exists) {
-            $this->name = 'Creer un Nouveau demande de fonds';
+            $this->name = 'Creer une Nouvelle demande de fonds';
         }else {
             if ($demande->attach) {
                 $this->path = $demande->attach->path.$demande->attach->name.'.'.$demande->attach->extension;
             }
             if ($demande->beneficiaire->attach) {
                 $this->pathBen = $demande->beneficiaire->attach->path.$demande->beneficiaire->attach->name.'.'.$demande->beneficiaire->attach->extension;
+                // dd($this->pathBen);
             }
         }
 
@@ -135,7 +136,7 @@ class DemandeEditScreen extends Screen
                     ->method('sendCode')
                     ->type(Color::DEFAULT())
                     ->canSee(Auth::user()->hasAccess('platform.autorisation.ReceiveMessage')),
-            Button::make('Soumettre')
+            Button::make($this->demande->id ? 'Modifier' : 'Soumettre')
                     ->icon('check')
                     ->method('create',[$this->demande->id])
                     ->type(Color::DEFAULT())
@@ -216,7 +217,7 @@ class DemandeEditScreen extends Screen
             // )->title('Input mask'),
             Layout::accordion([
                 'BUDGET CONTOLE' => BControlMetrics::class,
-            ])->canSee(isset($this->depense->budget->prevision)),
+            ])->canSee(isset($this->depense->budget->prevision) && Auth::user()->hasAccess('platform.autorisation.ReceiveMessage')),
             Layout::block(DemandeEditModaliteLayout::class)
                 ->title(__(strtoupper('Modalités de payement')))
                 ->description(__('Selectionnez les modalités de payement.'))
@@ -238,7 +239,7 @@ class DemandeEditScreen extends Screen
                 )
                 ->canSee(isset($this->demande->id)),
 
-            Layout::block(Layout::view('Autorisation',[$this->demande]))
+            Layout::block(Layout::view('autorisation',[$this->demande]))
                 ->title(__(strtoupper('Les Autorisations et finances')))
                 ->description(__('Accordez l\'Autorisation selon votre tittre et qualité.'))
                 ->commands(
@@ -279,7 +280,7 @@ class DemandeEditScreen extends Screen
             'demande.file' => ['required'],
         ]);
 
-// dd($request->input());
+
 
         if ($request->input('demande')['file'][0]) {
             $attach = $request->input('demande')['file'][0];
@@ -288,7 +289,7 @@ class DemandeEditScreen extends Screen
         // dd($request->input('demande')['file'][0]);
 
         foreach ($request->input() as $key => $value) {
-            if (($key != 'demande')) {
+            if (($key != 'demande' & $key != '0')) {
                 $autorisations[$key] = $value;
             }
         }
@@ -304,6 +305,7 @@ class DemandeEditScreen extends Screen
             // $demande->transaction = $request->demande['transaction'] ?? '';
             $demande->fill($demandeInput);
             $demande->file = $attach;
+            // dd($demande->file);
             // Ajout de la réalisation
             if (isset($autorisations['autorisationCaisse'])) {
                 $budget = Budget::where('id_depense',$demande->depense->budget->id_depense)->first();
@@ -315,7 +317,8 @@ class DemandeEditScreen extends Screen
                 // dd($budget);
                 $budget->save();
             }
-            $demande->fill($autorisations);!
+
+            $demande->fill($autorisations);
             // dd($demande,$autorisations);
 
             // dd($budget->realisation - (int)$demande->montant,(int)$demande->montant,$budget);
@@ -368,15 +371,26 @@ class DemandeEditScreen extends Screen
             $AB->notify(new NewDemandAB1($demande));
             // $demande->user->notify(new DemandFollow($demande));
         } else if ($this->demande) {
-            if (!$this->demande->autorisationAb1 && $demande->autorisationAb1) {
+            // if the demande have the first autorisation of AB, send notification to Receur
+            if ($demande->autorisationAb1 == 'Accorder' && !$demande->autorisationRec) {
                 $Recteur->notify(new NewDemandRec($demande));
+            }
+
+            // envoyer la notification si AB a mis sa première signature et que le recteur pas encore
+            if ($demande->autorisationAb1 && !$demande->autorisationRec) {
                 $demande->user->notify(new DemandFollow($demande));
-            }elseif (!$this->demande->autorisationRec && $demande->autorisationRec) {
+
+                // send the notification when the type of emission or type of transaction is added in the demande
+            }elseif ((!$this->demande->emission && $demande->emission) || (!$this->demande->transaction && $demande->transaction)) {
+                $demande->user->notify(new DemandFollow($demande));
+
+                // envoyer la notification tant que le recteur a mis sa signature et l'AB n'a pas mis sa deuxieme signature
+            }elseif ($demande->autorisationRec && !$demande->autorisationAb2) {
                 $AB->notify(new NewDemandAB2($demande));
                 $demande->user->notify(new DemandFollow($demande));
-            }elseif (!$this->demande->autorisationRec && $demande->autorisationRec) {
-                $AB->notify(new NewDemandAB2($demande));
-                $demande->user->notify(new DemandFollow($demande));
+            // }elseif (!$this->demande->autorisationRec && $demande->autorisationRec) {
+            //     $AB->notify(new NewDemandAB2($demande));
+            //     $demande->user->notify(new DemandFollow($demande));
             }elseif (!$this->demande->autorisationAb2 && $demande->autorisationAb2) {
                 $caissier->notify(new NewDemandBC($demande));
                 $demande->user->notify(new DemandFollow($demande));

@@ -14,8 +14,8 @@ class RefactoreDemandeTable extends Migration
     public function up()
     {
         Schema::table('demandes', function (Blueprint $table) {
-            $table->unsignedBigInteger('depense_id');
-            $table->string('type_document');
+            $table->unsignedBigInteger('depense_id')->after('user_id');
+            $table->string('type_document')->after('depense_id');
 
             $table->foreign('depense_id')->references('id')->on('depenses');
 

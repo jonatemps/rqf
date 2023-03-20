@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts\service;
+namespace App\Orchid\Layouts\Service;
 
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -46,7 +46,7 @@ class ServiceGourAnneeLayout extends Table
             TD::make('service', 'Service')
                 ->width('450')
                 ->render(function ($demande) {
-                    return $demande->service;
+                    return $demande->Service;
                 }),
 
             TD::make('montant', 'Somme')

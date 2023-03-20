@@ -2,12 +2,13 @@
 
 namespace App\Orchid\Layouts;
 
-use App\Models\service;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
@@ -51,16 +52,15 @@ class BeneficiaireEditLayout extends Rows
                 ->help('Saisisez le nom du bénéficiaire.')
                 // ->disabled(!Auth::user()->hasAccess('platform.autorisation.demande.beneficiairer'))
                 ,
-            Select::make('demande.beneficiaire.service_id')
-                    ->fromModel(service::class,'name', 'id')
+            Relation::make('demande.beneficiaire.service_id')
+                    ->fromModel(Service::class,'name', 'id')
                     ->title(__('Service'))
                     ->help('Choisissez le service du bénéficiare.')
                     ->required()
                     ->empty('No select'),
             ]),
-
             Upload::make('demande.beneficiaire.carteId')
-                ->groups('CarteId')
+                    ->groups('CarteId')
                     ->maxFiles(1)
                     ->title("Carte d'identité")
                     ->acceptedFiles('.pdf')

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens\demande\chart;
+namespace App\Orchid\Screens\Demande\Chart;
 
 use App\Orchid\Layouts\Examples\ChartBarExample;
 use App\Orchid\Layouts\Examples\ChartLineExample;

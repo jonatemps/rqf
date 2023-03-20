@@ -94,10 +94,12 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Statistiques des demandes')
                 ->title('Outils Statistiques')
                 ->icon('graph')
+                ->permission('platform.autorisation.ReceiveMessage')
                 ->route('platform.demandes.charts'),
 
             Menu::make('Statistiques des services')
                 ->icon('bar-chart')
+                ->permission('platform.autorisation.ReceiveMessage')
                 ->route('platform.services.charts')
                 ->divider(),
 

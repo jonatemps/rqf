@@ -14,8 +14,7 @@ class AddIntitulleAndMontantToDemande extends Migration
     public function up()
     {
         Schema::table('demandes', function (Blueprint $table) {
-            $table->float('montant');
-            $table->string('intitulle');
+            $table->float('montant')->after('user_id');
         });
     }
 

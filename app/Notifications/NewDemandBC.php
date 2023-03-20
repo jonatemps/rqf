@@ -65,7 +65,7 @@ class NewDemandBC extends Notification
     public function toDashboard($notifiable)
     {
         return (new DashboardMessage())
-        ->title('Demande traité par l\'AB !')
+        ->title('Demande traitée par l\'AB !')
         ->message('L\'AB vient d\'opérer le dernier traitement d\'une demande. Cliquez ici pour voir les demandes dans l\'ordre d\'arrivé.')
         ->action(route('platform.demande.edit',[$this->demande->id]));
     }

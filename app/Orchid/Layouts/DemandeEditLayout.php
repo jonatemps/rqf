@@ -3,7 +3,7 @@
 namespace App\Orchid\Layouts;
 
 use App\Models\Depense;
-use App\Models\service;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;

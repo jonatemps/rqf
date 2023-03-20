@@ -5,11 +5,16 @@ namespace App\Orchid\Resources;
 use App\Models\Annee;
 use App\Models\Budget;
 use App\Models\Depense;
+use App\Orchid\Layouts\adjustBudgetLayout;
 use Orchid\Crud\Resource;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Label;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\TD;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
 
 class BudgetRessource extends Resource
 {
@@ -56,6 +61,20 @@ class BudgetRessource extends Resource
                         ->disabled()
                         ->help("Niveau de réalistion du type de depense"),
                     ]),
+
+                // Label::make('adjustement')
+                //     ->title('Ajustement Budget'),
+                // Group::make([
+                //         Input::make('prevision')
+                //             ->title('Prévision')
+                //             ->placeholder("Saisisez le montant prévu pour ce type de depense")
+                //             ->help('Nouveau montant'),
+                //         Input::make('realistion')
+                //             ->title('Realisation')
+                //             ->disabled()
+                //             ->help("Niveau de réalistion du type de depense"),
+                //         ]),
+
         ];
     }
 

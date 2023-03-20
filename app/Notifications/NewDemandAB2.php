@@ -65,7 +65,7 @@ class NewDemandAB2 extends Notification
     public function toDashboard($notifiable)
     {
         return (new DashboardMessage())
-        ->title('Demande traité par le recteur')
+        ->title('Demande traitée par le Recteur')
         ->message('Le recteur vient de validé une demande. Cliquez ici pour voir les demandes dans l\'ordre d\'arrivé.')
         ->action(route('platform.demande.edit',[$this->demande->id]));
     }

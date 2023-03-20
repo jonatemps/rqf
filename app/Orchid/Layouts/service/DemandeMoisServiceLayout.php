@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts\service;
+namespace App\Orchid\Layouts\Service;
 
 use App\Models\VueTopDemande5ans;
 use Orchid\Screen\Layouts\Table;
@@ -42,7 +42,7 @@ class DemandeMoisServiceLayout extends Table
         TD::make('service', 'Service')
             ->width('450')
             ->render(function ($demande) {
-                return $demande->service;
+                return $demande->Service;
             }),
 
         TD::make('montant', 'Somme')

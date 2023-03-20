@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\demande\chart\DemandeChartScreen;
+use App\Orchid\Screens\Demande\Chart\DemandeChartScreen;
 use App\Orchid\Screens\Demande\DemandeEditScreen;
 use App\Orchid\Screens\Demande\DemandeListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
@@ -15,13 +15,14 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\service\chart\BaseChartScreen;
-use App\Orchid\Screens\service\chart\ServiceChartScreen;
+use App\Orchid\Screens\Service\Chart\BaseChartScreen;
+use App\Orchid\Screens\Service\Chart\ServiceChartScreen;
 use App\Orchid\Screens\ServiceEditeScreen;
 use App\Orchid\Screens\ServiceScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -41,8 +42,11 @@ use Tabuna\Breadcrumbs\Trail;
 //     ->name('platform.main');
 Route::screen('platform.presentation', PlatformScreen::class)
     ->name('platform.presentation');
+// Route::screen('/main', BaseChartScreen::class)
+//     ->name('platform.main');
+
 Route::screen('/main', BaseChartScreen::class)
-    ->name('platform.main');
+    ->name('platform.main')->middleware('userchart');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

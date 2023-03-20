@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens\service\chart;
+namespace App\Orchid\Screens\Service\Chart;
 
 use App\Models\Demande;
 use App\Models\ServiceGourAnnee;
@@ -17,6 +17,7 @@ use App\Orchid\Layouts\service\DemandeMoisServiceLayout;
 use App\Orchid\Layouts\service\ServiceGourAnneeLayout;
 use App\Orchid\Layouts\service\ServiceMoinsGourAnneeLayout;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;

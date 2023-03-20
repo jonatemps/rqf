@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\service;
+use App\Models\Service;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 

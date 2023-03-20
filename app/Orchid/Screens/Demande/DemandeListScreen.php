@@ -12,8 +12,8 @@ use App\Orchid\Layouts\DemandesListAtente2ABLayout;
 use App\Orchid\Layouts\DemandesListAtenteRecteurLayout;
 use App\Orchid\Layouts\DemandesListAttenteLayout;
 use App\Orchid\Layouts\DemandesListLayout;
-use App\Orchid\Layouts\DemandesListnonServiLayout;
-use App\Orchid\Layouts\DemandesListNonTraitéLayout;
+use App\Orchid\Layouts\DemandesListNonServiLayout;
+use App\Orchid\Layouts\DemandesListNonTraiteLayout;
 use App\Orchid\Layouts\DemandesListServiLayout;
 use App\Orchid\Layouts\DemandesListTousLayout;
 use App\Orchid\Layouts\DemandesMisEnAttentAB1Layout;
@@ -115,10 +115,10 @@ class DemandeListScreen extends Screen
             return [
                 Layout::tabs([
                     'Tous' => DemandesListTousLayout::class,
-                    'Sous AB N°1' => DemandesListNonTraitéLayout::class,
+                    'Sous AB N°1' => DemandesListNonTraiteLayout::class,
                     'Sous Recteur' => DemandesListAtenteRecteurLayout::class,
                     'Sous AB N°2' => DemandesListAtente2ABLayout::class,
-                    'Sous BC' => DemandesListnonServiLayout::class,
+                    'Sous BC' => DemandesListNonServiLayout::class,
                     'Servi' => DemandesListServiLayout::class,
                     'Mis en Ecart' => Layout::accordion([
                         // 'Par L\'AB Niveau 1' => DemandesMisEnAttentAB1Layout::class,
@@ -138,7 +138,7 @@ class DemandeListScreen extends Screen
                 Layout::tabs([
                     'Attente du recteur' => DemandesListAtenteRecteurLayout::class,
                     'En attente N°2 du AB' => DemandesListAtente2ABLayout::class,
-                    'Sous BC' => DemandesListnonServiLayout::class,
+                    'Sous BC' => DemandesListNonServiLayout::class,
                     'Servi' => DemandesListServiLayout::class,
                     'Mis en Ecart' => Layout::accordion([
                         // 'Par L\'AB Niveau 1' => DemandesMisEnAttentAB1Layout::class,
@@ -157,8 +157,8 @@ class DemandeListScreen extends Screen
             return [
                 Layout::tabs([
                     'Tous' => DemandesListTousLayout::class,
-                    'Sous AB N°1' => DemandesListNonTraitéLayout::class,
-                    'Sous BC' => DemandesListnonServiLayout::class,
+                    'Sous AB N°1' => DemandesListNonTraiteLayout::class,
+                    'Sous BC' => DemandesListNonServiLayout::class,
                     'Servi' => DemandesListServiLayout::class,
                     'Mis en Ecart' => Layout::accordion([
                         // 'Par L\'AB Niveau 1' => DemandesMisEnAttentAB1Layout::class,
@@ -177,10 +177,10 @@ class DemandeListScreen extends Screen
             return [
                 Layout::tabs([
                     'Tous' => DemandesListTousLayout::class,
-                    'Sous AB N°1' => DemandesListNonTraitéLayout::class,
+                    'Sous AB N°1' => DemandesListNonTraiteLayout::class,
                     'Attente du recteur' => DemandesListAtenteRecteurLayout::class,
                     'En attente N°2 du AB' => DemandesListAtente2ABLayout::class,
-                    'Sous BC' => DemandesListnonServiLayout::class,
+                    'Sous BC' => DemandesListNonServiLayout::class,
                     'Servi' => DemandesListServiLayout::class,
                     'Mis en Ecart' => Layout::accordion([
                         // 'Par L\'AB Niveau 1' => DemandesMisEnAttentAB1Layout::class,
@@ -199,10 +199,10 @@ class DemandeListScreen extends Screen
             return [
                 Layout::tabs([
                     'Tous' => DemandesListTousLayout::class,
-                    'Sous AB N°1' => DemandesListNonTraitéLayout::class,
+                    'Sous AB N°1' => DemandesListNonTraiteLayout::class,
                     'Attente du recteur' => DemandesListAtenteRecteurLayout::class,
                     'En attente N°2 du AB' => DemandesListAtente2ABLayout::class,
-                    'Sous BC' => DemandesListnonServiLayout::class,
+                    'Sous BC' => DemandesListNonServiLayout::class,
                     'Servi' => DemandesListServiLayout::class,
                     'Mis en Attente' => Layout::accordion([
                         'Par L\'AB Niveau 1' => DemandesMisEnAttentAB1Layout::class,

@@ -10,7 +10,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class DemandesListNonTraitéLayout extends Table
+class DemandesListNonTraiteLayout extends Table
 {
     /**
      * Data source.

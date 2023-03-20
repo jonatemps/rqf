@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens;
 
-use App\Models\service;
+use App\Models\Service;
 use App\Orchid\Layouts\ServiceEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
