@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Budget\BudgetEditScreen;
 use App\Orchid\Screens\Demande\Chart\DemandeChartScreen;
 use App\Orchid\Screens\Demande\DemandeEditScreen;
 use App\Orchid\Screens\Demande\DemandeListScreen;
@@ -158,4 +159,8 @@ Route::screen('demande/{id}/edit', DemandeEditScreen::class)
 
 Route::screen('demandes/charts', DemandeChartScreen::class)->name('platform.demandes.charts');
 Route::screen('services/charts', ServiceChartScreen::class)->name('platform.services.charts');
+
+Route::screen('budget/{id}/edit/{year}', BudgetEditScreen::class)->name('platform.budget.edit');
+// Route::screen('services/charts', ServiceChartScreen::class)->name('platform.services.charts');
+
 

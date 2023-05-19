@@ -8,6 +8,7 @@ use App\Models\Depense;
 use App\Orchid\Layouts\adjustBudgetLayout;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
@@ -86,14 +87,21 @@ class BudgetRessource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('id'),
+            TD::make('id')
+            ->render(function ( $model) {
+                return Link::make('id')->route('platform.budget.edit',['id' => $model->id,'year' => $model->id_annee]);
+            })
+            ,
             TD::make('id_annee','Année')
                 ->render(function ($model) {
-                    return $model->annee->libelle;
+
+                    return Link::make($model->annee->libelle)->route('platform.budget.edit',['id' => $model->id,'year' => $model->id_annee]);
+                    // return $model->annee->libelle;
                 }),
             TD::make('id_depense','Type dépense')
                 ->render(function ($model) {
-                    return $model->depense->libelle;
+                    return Link::make($model->depense->libelle)->route('platform.budget.edit',['id' => $model->id,'year' => $model->id_annee]);
+                    // return $model->depense->libelle;
                 }),
             TD::make('prevision','Prévision')
                 ->render(function ($model) {

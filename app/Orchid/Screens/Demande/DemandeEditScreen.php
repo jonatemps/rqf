@@ -151,6 +151,8 @@ class DemandeEditScreen extends Screen
      */
     public function layout(): array
     {
+        // dd(asset('storage/'.$this->path));
+        // dd(storage_path().'\\app\\public\\'.str_replace('/','\\',$this->path));
         // dd(service::whereHas('secteur', function($q){
         //     $q->where('id', Auth::user()->service->secteur->id);
         // })->get());
@@ -163,9 +165,12 @@ class DemandeEditScreen extends Screen
             Layout::block(DemandeEditLayout::class)
                 ->title(__('DEMANDE'))
                 ->description(__('Fournissez les informmation de la démande proprement dite.')),
-
+            // Layout::view('pdfViewer'),
                 // ->canSee(Auth::user()->hasAccess('platform.autorisation.demander'))
-
+                Layout::view('pdfViewer',['path' => asset('storage/'.$this->path)]),
+            Layout::block(Layout::view('pdfViewer',['path' => asset('storage/'.$this->path)]))
+                ->title(__(strtoupper('Soubassement')))
+                ->description(__('Lectu')),
             Layout::block(new FileUploadLayout($this->demande,$this->path))
                 ->title(__(strtoupper('Piece jointe en PDF') ))
                 ->description(__('Selectionnez le motif de la demande.')),
